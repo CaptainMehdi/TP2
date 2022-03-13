@@ -12,22 +12,17 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String name;
+    private String nom;
+    private String prenom;
 
-//    public Client(){
-//    }
-//    public Client(String name) {
-//        this.name = name;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
+    public Client(String nom, String prenom) {
+        this.nom = nom;
+        this.prenom = prenom;
+    }
+
 }
