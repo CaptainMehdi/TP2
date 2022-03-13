@@ -1,6 +1,7 @@
 package ca.cal.persistence;
 
 import ca.cal.model.Client;
+import ca.cal.model.Document;
 import ca.cal.model.Emprunt;
 
 import java.time.LocalDate;
@@ -8,7 +9,8 @@ import java.time.LocalDate;
 public interface EmpruntDao {
     <T> void save(T t);
     <T> void merge(T t);
-    long createEmprunt();
+
+    long createEmprunt(String name);
 
     long createDocument(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type);
 
@@ -19,4 +21,6 @@ public interface EmpruntDao {
     Client getClientAvecCours(long profId);
 
     Emprunt getEmprunt(long coursId);
+
+    Document getDocument(long docId);
 }

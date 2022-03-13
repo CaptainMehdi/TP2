@@ -34,15 +34,23 @@ public class EmpruntDaoJpaH2 implements EmpruntDao{
     }
 
     @Override
-    public long createEmprunt() {
-        final Emprunt emprunt = new Emprunt();
+    public long createEmprunt(String name) {
+        final Emprunt emprunt = Emprunt.builder().name(name).build();
         save(emprunt);
         return emprunt.getId();
     }
 
     @Override
     public long createDocument(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type) {
-        final Document document = new Document(titre,auteur,editeur,anneePub,nbrPage,genre,type);
+        Document document = Document.builder()
+                .titre(titre)
+                .auteur(auteur)
+                .editeur(editeur)
+                .anneePub(anneePub)
+                .nbrPage(nbrPage)
+                .genre(genre)
+                .type(type)
+                .build();
         save(document);
         return document.getId();
     }
@@ -59,7 +67,7 @@ public class EmpruntDaoJpaH2 implements EmpruntDao{
         final EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        final Client client = em.find(Client.class,clientId);
+        Client client = em.find(Client.class,clientId);
 
         em.getTransaction().commit();
         em.close();
@@ -76,10 +84,22 @@ public class EmpruntDaoJpaH2 implements EmpruntDao{
         final EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        final Emprunt emprunt = em.find(Emprunt.class,empruntId);
+        Emprunt emprunt = em.find(Emprunt.class,empruntId);
 
         em.getTransaction().commit();
         em.close();
         return emprunt;
+    }
+
+    @Override
+    public Document getDocument(long docId) {
+        final EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        Document document = em.find(Document.class,docId);
+
+        em.getTransaction().commit();
+        em.close();
+        return document;
     }
 }

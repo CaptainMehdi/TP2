@@ -1,5 +1,7 @@
 package ca.cal.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,16 +11,21 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Emprunt {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String nom;
+    private String name;
 
-    @OneToMany(mappedBy = "document")
+    @OneToMany(mappedBy = "emprunt",fetch = FetchType.EAGER)
     private List<Document> documentList = new ArrayList<>();
 
 
-
+    public void addDocument(Document document) {
+        documentList.add(document);
+        document.setEmprunt(this);
+    }
 }

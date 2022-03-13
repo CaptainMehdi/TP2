@@ -1,20 +1,21 @@
 package ca.cal.service;
 
 import ca.cal.model.Client;
+import ca.cal.model.Document;
 import ca.cal.model.Emprunt;
 import ca.cal.persistence.EmpruntDao;
 
 import java.time.LocalDate;
 
-public class EmpruntService {
+public class Service {
   private EmpruntDao dao;
 
-  public EmpruntService(EmpruntDao dao) {
+  public Service(EmpruntDao dao) {
     this.dao = dao;
   }
 
-  public long createEmprunt(){
-    return dao.createEmprunt();
+  public long createEmprunt(String name){
+    return dao.createEmprunt(name);
   }
 
   public long createDocument(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type) {
@@ -25,32 +26,29 @@ public class EmpruntService {
     return dao.createClient(prenom, nom);
   }
 
-//  public void addClientToCours(long clientId, long empruntId) {
-//    var client = dao.getClientAvecCours(clientId);
-//    var emprunt = dao.getEmprunt(empruntId);
-//    //prof.addCours(cours);
-//    emprunt.setClient(client);
-//    dao.merge(client);
-//    dao.merge(emprunt);
-//  }
-
-  public void addDocumentToCours(long etudiant1Id, long coursId) {
+  public void addDocumentToEmprunt(long docId, long empruntId) {
+    var document = dao.getDocument(docId);
+    var emprunt = dao.getEmprunt(empruntId);
+    emprunt.addDocument(document);
+    dao.merge(emprunt);
+    dao.merge(document);
   }
 
-  public String coursToStringEmprunt(long coursId) {
-    return "";
+  public void addEmpruntToClient(long clientId, long empruntId) {
+
   }
 
   public Client getClient(long profId) {
     return dao.getClient(profId);
   }
 
-  public Client getClientAvecCours(long profId) {
-    return dao.getClientAvecCours(profId);
+  public Document getDocument(long docId){
+    return dao.getDocument(docId);
   }
 
   public Emprunt getEmprunt(long coursId) {
     return dao.getEmprunt(coursId);
   }
+
 
 }
