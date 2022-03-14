@@ -12,11 +12,12 @@ public interface EmpruntDao {
 
     long createEmprunt(String name);
 
-    long createLivre(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type);
+    long createLivre(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type, LocalDate emprunt);
 
-    long createCd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree);
+    long createCd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type, int duree, LocalDate emprunt);
 
-    long createDvd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree);
+    long createDvd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type, int duree, LocalDate emprunt);
+
     long createClient(String nom, String prenom);
 
     Client getClient(long profId);

@@ -41,7 +41,7 @@ public class EmpruntDaoJpaH2 implements EmpruntDao {
     }
 
     @Override
-    public long createLivre(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type) {
+    public long createLivre(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type,LocalDate emprunt) {
         Livre livre = Livre.builder()
                 .titre(titre)
                 .auteur(auteur)
@@ -50,12 +50,14 @@ public class EmpruntDaoJpaH2 implements EmpruntDao {
                 .genre(genre)
                 .type(type)
                 .nbrPage(nbrPage)
+                .empruntDoc(emprunt)
                 .build();
         save(livre);
         return livre.getId();
     }
 
-    public long createCd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type, int duree) {
+    @Override
+    public long createCd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type, int duree,LocalDate emprunt) {
         Dvd dvd = Dvd.builder()
                 .titre(titre)
                 .auteur(auteur)
@@ -63,13 +65,15 @@ public class EmpruntDaoJpaH2 implements EmpruntDao {
                 .anneePub(anneePub)
                 .genre(genre)
                 .type(type)
-                .duree(duree).build();
+                .duree(duree)
+                .empruntDoc(emprunt).build();
         save(dvd);
         return dvd.getId();
 
     }
 
-    public long createDvd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type, int duree) {
+    @Override
+    public long createDvd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type, int duree,LocalDate emprunt) {
         Dvd dvd = Dvd.builder()
                 .titre(titre)
                 .auteur(auteur)
@@ -77,7 +81,9 @@ public class EmpruntDaoJpaH2 implements EmpruntDao {
                 .anneePub(anneePub)
                 .genre(genre)
                 .type(type)
-                .duree(duree).build();
+                .duree(duree)
+                .empruntDoc(emprunt)
+                .build();
         save(dvd);
         return dvd.getId();
 

@@ -18,16 +18,16 @@ public class Service {
     return dao.createEmprunt(name);
   }
 
-  public long createLivre(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type){
-    return dao.createLivre(titre, auteur, editeur, anneePub, nbrPage, genre, type);
+  public long createLivre(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type,LocalDate emprunt){
+    return dao.createLivre(titre, auteur, editeur, anneePub, nbrPage, genre, type,emprunt);
   }
 
-  public long createDvd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree){
-    return dao.createDvd( titre, auteur, editeur, anneePub, genre, type, duree);
+  public long createDvd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree,LocalDate emprunt){
+    return dao.createDvd( titre, auteur, editeur, anneePub, genre, type, duree,emprunt);
   }
 
-  public long createCd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree){
-    return dao.createCd( titre, auteur, editeur, anneePub, genre, type, duree);
+  public long createCd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree,LocalDate emprunt){
+    return dao.createCd( titre, auteur, editeur, anneePub, genre, type, duree,emprunt);
   }
 
   public long createClient(String prenom, String nom) {
@@ -39,15 +39,13 @@ public class Service {
     var emprunt = dao.getEmprunt(empruntId);
     emprunt.addDocument(document);
     dao.merge(emprunt);
-    dao.merge(document);
   }
 
   public void addEmpruntToClient(long clientId, long empruntId) {
     var client = dao.getClient(clientId);
     var emprunt = dao.getEmprunt(empruntId);
-    client.addEmprunt(emprunt);
+    emprunt.addClient(client);
     dao.merge(emprunt);
-    dao.merge(client);
   }
 
   public Client getClient(long profId) {

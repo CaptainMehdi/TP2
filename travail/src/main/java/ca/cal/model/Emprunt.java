@@ -1,9 +1,7 @@
 package ca.cal.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import net.bytebuddy.build.ToStringPlugin;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,10 +18,10 @@ public class Emprunt {
     private long id;
     private String name;
 
-    @OneToMany(mappedBy = "emprunt",fetch = FetchType.EAGER)
-    private List<Document> documentList = new ArrayList<>();
+    @OneToMany(mappedBy = "emprunt",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    List<Document> documentList = new ArrayList<>();
 
-    @OneToOne(mappedBy = "empruntClient")
+    @OneToOne(mappedBy = "emprunt",cascade = CascadeType.ALL)
     private Client client;
 
 
@@ -32,7 +30,7 @@ public class Emprunt {
         document.setEmprunt(this);
     }
 
-    public List<Document> getDocumentList() {
-        return documentList;
+    public void addClient(Client client){
+        client.setEmprunt(this);
     }
 }

@@ -1,36 +1,28 @@
 package ca.cal.model;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Inheritance(strategy = InheritanceType.JOINED)
+@AllArgsConstructor
 @NoArgsConstructor
 public class Client extends Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private String nom;
-
-    private String prenom;
 
     public Client(String nom, String prenom) {
-        this.nom = nom;
-        this.prenom = prenom;
+       super(nom,prenom);
     }
 
     @OneToOne
-    Emprunt emprunt;
+    @ToString.Include
+    public Emprunt emprunt;
 
-    public void addEmprunt(Emprunt emprunt) {
+    public void setEmprunt(Emprunt emprunt) {
         this.emprunt = emprunt;
-        emprunt.setClient(this);
     }
 
-    public void getListeEmprunt(){
-        System.out.println(emprunt.getDocumentList());
-    }
     public void getDateDeRetour(){
         System.out.println();
     }

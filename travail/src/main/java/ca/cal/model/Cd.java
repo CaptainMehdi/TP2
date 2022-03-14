@@ -20,11 +20,17 @@ public class Cd extends Document{
 
     private LocalDate dateRetour;
     private int duree;
+    private LocalDate empruntDoc;
 
     public Cd (String titre, String auteur, String editeur, LocalDate anneePub,
-               String genre, String type,int duree){
+               String genre, String type,int duree, LocalDate emprunt){
         super(titre,auteur,editeur,anneePub,genre,type);
         this.duree = duree;
+        this.empruntDoc = emprunt;
+        setDateRetour(emprunt);
     }
 
+    public void setDateRetour(LocalDate emprunt) {
+        this.dateRetour = emprunt.plusDays(14) ;
+    }
 }

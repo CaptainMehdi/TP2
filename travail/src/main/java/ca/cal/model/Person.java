@@ -4,12 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
 @Entity
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Person {
@@ -20,4 +21,9 @@ public class Person {
     private String nom;
 
     private String prenom;
+
+    public Person(String nom, String prenom) {
+        this.nom = nom;
+        this.prenom = prenom;
+    }
 }
