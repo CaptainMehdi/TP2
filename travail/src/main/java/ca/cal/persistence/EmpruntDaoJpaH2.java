@@ -6,9 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
+import java.util.List;
 
-public class EmpruntDaoJpaH2 implements EmpruntDao{
+public class EmpruntDaoJpaH2 implements EmpruntDao {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("tp2");
+
     @Override
     public <T> void save(T t) {
         final EntityManager em = emf.createEntityManager();
@@ -53,7 +55,7 @@ public class EmpruntDaoJpaH2 implements EmpruntDao{
         return livre.getId();
     }
 
-    public long createCd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree){
+    public long createCd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type, int duree) {
         Dvd dvd = Dvd.builder()
                 .titre(titre)
                 .auteur(auteur)
@@ -67,7 +69,7 @@ public class EmpruntDaoJpaH2 implements EmpruntDao{
 
     }
 
-    public long createDvd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree){
+    public long createDvd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type, int duree) {
         Dvd dvd = Dvd.builder()
                 .titre(titre)
                 .auteur(auteur)
@@ -80,9 +82,10 @@ public class EmpruntDaoJpaH2 implements EmpruntDao{
         return dvd.getId();
 
     }
+
     @Override
     public long createClient(String nom, String prenom) {
-        final Client client = new Client(nom,prenom);
+        final Client client = new Client(nom, prenom);
         save(client);
         return client.getId();
     }
@@ -92,24 +95,20 @@ public class EmpruntDaoJpaH2 implements EmpruntDao{
         final EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        Client client = em.find(Client.class,clientId);
+        Client client = em.find(Client.class, clientId);
 
         em.getTransaction().commit();
         em.close();
         return client;
     }
 
-    @Override
-    public Client getClientAvecCours(long profId) {
-        return null;
-    }
 
     @Override
     public Emprunt getEmprunt(long empruntId) {
         final EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        Emprunt emprunt = em.find(Emprunt.class,empruntId);
+        Emprunt emprunt = em.find(Emprunt.class, empruntId);
 
         em.getTransaction().commit();
         em.close();
@@ -121,7 +120,7 @@ public class EmpruntDaoJpaH2 implements EmpruntDao{
         final EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        Document document = em.find(Document.class,docId);
+        Document document = em.find(Document.class, docId);
 
         em.getTransaction().commit();
         em.close();
@@ -133,11 +132,17 @@ public class EmpruntDaoJpaH2 implements EmpruntDao{
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        Document document = em.find(Document.class,title);
+        List<Document> documents = em.createQuery("select document from Document document", Document.class).getResultList();
 
         em.getTransaction().commit();
         em.close();
-        return document;
+
+        for (Document document : documents) {
+            if (document.getTitre().contains(title)) {
+                return document;
+            }
+        }
+        return null;
     }
 
 }

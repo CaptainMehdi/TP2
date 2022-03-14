@@ -21,8 +21,6 @@ public interface EmpruntDao {
 
     Client getClient(long profId);
 
-    Client getClientAvecCours(long profId);
-
     Emprunt getEmprunt(long coursId);
 
     Document getDocument(long docId);

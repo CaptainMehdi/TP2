@@ -37,4 +37,8 @@ public class Document {
         this.genre = genre;
         this.type = type;
     }
+
+    public String getTitre() {
+        return titre;
+    }
 }

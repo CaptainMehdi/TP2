@@ -43,7 +43,11 @@ public class Service {
   }
 
   public void addEmpruntToClient(long clientId, long empruntId) {
-
+    var client = dao.getClient(clientId);
+    var emprunt = dao.getEmprunt(empruntId);
+    client.addEmprunt(emprunt);
+    dao.merge(emprunt);
+    dao.merge(client);
   }
 
   public Client getClient(long profId) {

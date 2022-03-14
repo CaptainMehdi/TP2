@@ -23,9 +23,16 @@ public class Emprunt {
     @OneToMany(mappedBy = "emprunt",fetch = FetchType.EAGER)
     private List<Document> documentList = new ArrayList<>();
 
+    @OneToOne(mappedBy = "empruntClient")
+    private Client client;
+
 
     public void addDocument(Document document) {
         documentList.add(document);
         document.setEmprunt(this);
+    }
+
+    public List<Document> getDocumentList() {
+        return documentList;
     }
 }

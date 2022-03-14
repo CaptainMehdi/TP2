@@ -37,7 +37,7 @@ public class Main {
 
         Client client = service.getClient(clientId);
 
-        service.getDocumentByTitle("tt");
+        System.out.println(service.getDocumentByTitle("tt"));
 
 
     }
