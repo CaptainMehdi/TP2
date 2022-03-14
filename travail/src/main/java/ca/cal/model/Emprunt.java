@@ -19,7 +19,7 @@ public class Emprunt {
     private String name;
 
     @OneToMany(mappedBy = "emprunt",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    List<Document> documentList = new ArrayList<>();
+    private List<Document> documentList = new ArrayList<>();
 
     @OneToOne(mappedBy = "emprunt",cascade = CascadeType.ALL)
     private Client client;

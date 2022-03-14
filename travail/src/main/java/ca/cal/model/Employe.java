@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Persistence;
+import java.time.LocalDate;
+import java.util.List;
+
 @SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
@@ -30,4 +33,5 @@ public class Employe extends Person {
     public Service getService() {
         return service;
     }
+
 }

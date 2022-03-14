@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -23,7 +24,7 @@ public class Client extends Person {
         this.emprunt = emprunt;
     }
 
-    public void getDateDeRetour(){
-        System.out.println();
+    public List<Document> getDateDeRetour(){
+        return emprunt.getDocumentList();
     }
 }

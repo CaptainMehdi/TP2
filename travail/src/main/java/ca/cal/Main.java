@@ -39,9 +39,9 @@ public class Main {
         service.addEmpruntToClient(clientId,empruntId);
 
         System.out.println(emprunt);
-       // System.out.println(client);
+        System.out.println(client);
 
-//        System.out.println(service.getDocumentByTitle("tt"));
+        System.out.println(service.getDocumentByTitle("tt"));
 
 
     }
