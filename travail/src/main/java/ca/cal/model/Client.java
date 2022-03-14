@@ -24,7 +24,8 @@ public class Client extends Person {
         this.emprunt = emprunt;
     }
 
-    public List<Document> getDateDeRetour(){
+    public List<Document> getListEmprunt(){
         return emprunt.getDocumentList();
     }
+
 }

@@ -21,7 +21,8 @@ public class Emprunt {
     @OneToMany(mappedBy = "emprunt",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Document> documentList = new ArrayList<>();
 
-    @OneToOne(mappedBy = "emprunt",cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
     private Client client;
 
 
