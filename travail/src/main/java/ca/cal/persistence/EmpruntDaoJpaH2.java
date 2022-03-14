@@ -1,8 +1,6 @@
 package ca.cal.persistence;
 
-import ca.cal.model.Client;
-import ca.cal.model.Document;
-import ca.cal.model.Emprunt;
+import ca.cal.model.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,20 +39,47 @@ public class EmpruntDaoJpaH2 implements EmpruntDao{
     }
 
     @Override
-    public long createDocument(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type) {
-        Document document = Document.builder()
+    public long createLivre(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type) {
+        Livre livre = Livre.builder()
                 .titre(titre)
                 .auteur(auteur)
                 .editeur(editeur)
                 .anneePub(anneePub)
-                .nbrPage(nbrPage)
                 .genre(genre)
                 .type(type)
+                .nbrPage(nbrPage)
                 .build();
-        save(document);
-        return document.getId();
+        save(livre);
+        return livre.getId();
     }
 
+    public long createCd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree){
+        Dvd dvd = Dvd.builder()
+                .titre(titre)
+                .auteur(auteur)
+                .editeur(editeur)
+                .anneePub(anneePub)
+                .genre(genre)
+                .type(type)
+                .duree(duree).build();
+        save(dvd);
+        return dvd.getId();
+
+    }
+
+    public long createDvd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree){
+        Dvd dvd = Dvd.builder()
+                .titre(titre)
+                .auteur(auteur)
+                .editeur(editeur)
+                .anneePub(anneePub)
+                .genre(genre)
+                .type(type)
+                .duree(duree).build();
+        save(dvd);
+        return dvd.getId();
+
+    }
     @Override
     public long createClient(String nom, String prenom) {
         final Client client = new Client(nom,prenom);
@@ -102,4 +127,17 @@ public class EmpruntDaoJpaH2 implements EmpruntDao{
         em.close();
         return document;
     }
+
+    @Override
+    public Document getDocumentByTitle(String title) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        Document document = em.find(Document.class,title);
+
+        em.getTransaction().commit();
+        em.close();
+        return document;
+    }
+
 }

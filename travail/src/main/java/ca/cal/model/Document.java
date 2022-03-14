@@ -1,13 +1,16 @@
 package ca.cal.model;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import javax.swing.*;
 import java.time.LocalDate;
 
 @Entity
 @Data
-@Builder
+@SuperBuilder
+@Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Document {
@@ -19,7 +22,6 @@ public class Document {
     private String auteur;
     private String editeur;
     private LocalDate anneePub;
-    private int nbrPage;
     private String genre;
     private String type;
 
@@ -27,4 +29,12 @@ public class Document {
     @ToString.Exclude
     private Emprunt emprunt;
 
+    public Document(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type) {
+        this.titre = titre;
+        this.auteur = auteur;
+        this.editeur = editeur;
+        this.anneePub = anneePub;
+        this.genre = genre;
+        this.type = type;
+    }
 }

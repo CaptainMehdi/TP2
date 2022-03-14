@@ -12,8 +12,11 @@ public interface EmpruntDao {
 
     long createEmprunt(String name);
 
-    long createDocument(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type);
+    long createLivre(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type);
 
+    long createCd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree);
+
+    long createDvd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree);
     long createClient(String nom, String prenom);
 
     Client getClient(long profId);
@@ -23,4 +26,6 @@ public interface EmpruntDao {
     Emprunt getEmprunt(long coursId);
 
     Document getDocument(long docId);
+
+    Document getDocumentByTitle(String title);
 }

@@ -18,8 +18,16 @@ public class Service {
     return dao.createEmprunt(name);
   }
 
-  public long createDocument(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type) {
-    return dao.createDocument(titre,auteur,editeur,anneePub,nbrPage,genre,type);
+  public long createLivre(String titre, String auteur, String editeur, LocalDate anneePub, int nbrPage, String genre, String type){
+    return dao.createLivre(titre, auteur, editeur, anneePub, nbrPage, genre, type);
+  }
+
+  public long createDvd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree){
+    return dao.createDvd( titre, auteur, editeur, anneePub, genre, type, duree);
+  }
+
+  public long createCd(String titre, String auteur, String editeur, LocalDate anneePub, String genre, String type,int duree){
+    return dao.createCd( titre, auteur, editeur, anneePub, genre, type, duree);
   }
 
   public long createClient(String prenom, String nom) {
@@ -51,4 +59,7 @@ public class Service {
   }
 
 
+  public Document getDocumentByTitle(String title) {
+    return dao.getDocumentByTitle(title);
+  }
 }

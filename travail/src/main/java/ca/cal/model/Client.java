@@ -21,5 +21,5 @@ public class Client {
         this.nom = nom;
         this.prenom = prenom;
     }
-
+    
 }
